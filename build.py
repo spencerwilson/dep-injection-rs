@@ -11,16 +11,20 @@ from cffi import FFI
 ffibuilder = FFI()
 
 ffibuilder.cdef("""
-    extern "Python" void log_msg(char *);
+    extern "Python" void cb_logger_log(void *, char *);
 
-    int add(int, int);  // Do something, calling `log` as a side effect
+    void make_client(void *, void *);
+    int add(void *, int, int);  // Do something, logging as a side effect
 """)
 
 ffibuilder.set_source("ext_module", 
-    r"""
-        int add(int, int);
+    """
+        void make_client(void *, void *);
+        int add(void *, int, int);
     """,
-    libraries=[])
+    libraries=['rust_core'],
+    # the following has no impact
+    include_dirs=['/Users/ssw/code/di-rs/'])
 
 if __name__ == "__main__":
     ffibuilder.compile(verbose=True)

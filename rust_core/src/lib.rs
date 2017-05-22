@@ -1,24 +1,32 @@
 extern crate libc;
 
-use libc::uint32_t;
+mod extern_api;
+mod logger;
 
-struct Client {
-    logger: 
+/// An SDK client.
+///
+/// Contains incredible patent-pending tech such as "integer addition".
+pub struct Client<T: logger::Logger> {
+    logger: T,
 }
 
-impl Client {
-    #[no_mangle]
-    pub extern "C" fn add(&self, a: uint32_t, b: uint32_t) -> uint32_t {
-        let result = a + b;
+/// The pluggable bits of a client.
+pub struct Plugins<T> where
+    T: logger::Logger,
+{
+    logger: T,
+}
 
-        // call logger
-
-        
-        a + b
+impl<T: logger::Logger> Client<T> {
+    fn new(plugins: Plugins<T>) -> Self {
+        Self {
+            logger: plugins.logger,
+        }
     }
 
-    /// Take a pointer to struct w/ fields of value fn* sufficient to make a Logger
-    pub make_logger(ptr) -> Logger {
-
+    fn add(&self, a: u32, b: u32) -> u32 {
+        let result = a + b;
+        self.logger.log(&format!("Rust computed {} + {} = {}", a, b, result));
+        a + b
     }
 }

@@ -1,4 +1,5 @@
 import sdk
 
-result = sdk.log(1, 2)
+client = sdk.Client()
+result = client.add(1, 2)
 assert result == 3
