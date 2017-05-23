@@ -1,5 +1,4 @@
 use libc::c_void;
-use std;
 
 use {Client, Plugins};
 use logger;

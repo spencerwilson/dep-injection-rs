@@ -1,7 +1,7 @@
 extern crate libc;
 
-mod extern_api;
-mod logger;
+pub mod extern_api;
+pub mod logger;
 
 /// An SDK client.
 ///

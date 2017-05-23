@@ -1,6 +1,5 @@
-use libc::{c_char, c_void};
+use libc::c_void;
 use std;
-use std::convert::From;
 
 /// A trait for types that can record diagnostic messages.
 pub trait Logger {
