@@ -7,4 +7,4 @@ authors = ["Spencer Wilson <sw12@users.noreply.github.com>"]
 libc = "*"
 
 [lib]
-crate-type = ["cdylib"]
+crate-type = ["staticlib"]

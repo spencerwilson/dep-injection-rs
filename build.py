@@ -24,7 +24,7 @@ ffibuilder.set_source("ext_module",
     """,
     libraries=['rust_core'],
     # the following has no impact
-    include_dirs=['/Users/ssw/code/di-rs/'])
+    include_dirs=['.'])
 
 if __name__ == "__main__":
     ffibuilder.compile(verbose=True)
