@@ -13,16 +13,16 @@ ffibuilder = FFI()
 ffibuilder.cdef("""
     extern "Python" void cb_logger_log(void *, char *);
 
-    void make_client(void *, void *);
+    void * make_client(void *, void *);
     int add(void *, int, int);  // Do something, logging as a side effect
 """)
 
 ffibuilder.set_source("ext_module", 
     """
-        void make_client(void *, void *);
+        void * make_client(void *, void *);
         int add(void *, int, int);
     """,
-    libraries=['rust_core'],
+    #libraries=['./rust_core.a'],
     # the following has no impact
     include_dirs=['.'])
 

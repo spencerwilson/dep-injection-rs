@@ -2,4 +2,4 @@
 
 all:
 	cargo build
-	cp target/debug/librust_core.dylib ..
+	cp target/debug/librust_core.a ..
