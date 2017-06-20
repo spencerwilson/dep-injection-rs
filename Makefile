@@ -1,13 +1,20 @@
-.PHONY = all test doc
+.PHONY = all build test doc
 
-all:
+export OUT_DIR = build
+
+all: build test
+
+build:
+	mkdir -p $(OUT_DIR)
+	touch $(OUT_DIR)/__init__.py
 	$(MAKE) -C rust_core
 	./build.py
-	clang -bundle -undefined dynamic_lookup ./ext_module.o -L/usr/local/lib -L/usr/local/opt/openssl/lib -L/usr/local/opt/sqlite/lib -L. -lrust_core -o ./ext_module.so
 
-test: all
-	clear
+test:
 	python test.py
+
+clean:
+	rm -rf $(OUT_DIR)
 
 doc:
 	pushd rust_core; \

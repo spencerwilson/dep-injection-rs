@@ -1,4 +1,7 @@
-from ext_module import ffi, lib
+import os
+_temp = __import__(os.environ["OUT_DIR"] + ".ext_module", globals(), locals(), ["ffi", "lib"])
+ffi = _temp.ffi
+lib = _temp.lib
 
 class Client(object):
     def __init__(self, **kwargs):

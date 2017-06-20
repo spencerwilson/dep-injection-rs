@@ -1,5 +1,7 @@
-.PHONY = all
+.PHONY = all build
 
-all:
-	cargo build
-	cp target/debug/librust_core.a ..
+all: build
+
+build:
+	cargo build --release
+	cp target/debug/librust_core.a ../$(OUT_DIR)

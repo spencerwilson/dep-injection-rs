@@ -7,6 +7,7 @@
 # Prerequisites: a C compiler is installed on your system.
 
 from cffi import FFI
+import os
 
 ffibuilder = FFI()
 
@@ -22,9 +23,8 @@ ffibuilder.set_source("ext_module",
         void * make_client(void *, void *);
         int add(void *, int, int);
     """,
-    #libraries=['./rust_core.a'],
-    # the following has no impact
-    include_dirs=['.'])
+    libraries=["rust_core"],
+    library_dirs=["."])
 
 if __name__ == "__main__":
-    ffibuilder.compile(verbose=True)
+    ffibuilder.compile(tmpdir=os.environ["OUT_DIR"])
